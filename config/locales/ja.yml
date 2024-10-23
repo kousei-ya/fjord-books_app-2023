@@ -1,6 +1,6 @@
 ja:
   activerecord:
-    models:
+    models: 
       book: 本
     attributes:
       book:
@@ -22,15 +22,11 @@ ja:
       heading: 編集
     new:
       heading: 新規作成
-    created: 本が正常に作成されました
-    updated: 本が正常に更新されました
-    destroyed: 本が正常に削除されました
   helpers:
     submit:
       create: 登録
       update: 更新
-  errors:
-    template:
-      header:
-        one:   "%{count}件のエラーにより、この本を保存できませんでした"
-        other: "%{count}件のエラーにより、この本を保存できませんでした"
+  actions:
+      created: "%{model}が正常に作成されました"
+      updated: "%{model}が正常に更新されました"
+      destroyed: "%{model}が正常に削除されました"

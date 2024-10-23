@@ -54,9 +54,6 @@ en:
       heading: Editing
     new:
       heading: New Book
-    created: Book was successfully created.
-    updated: Book was successfully updated.
-    destroyed: Book was successfully destroyed.
   helpers:
     submit:
       create: Register
@@ -66,5 +63,9 @@ en:
       header:
         one:   "%{count} error prohibited this book from being saved:"
         other: "%{count} errors prohibited this book from being saved:"
+  actions:
+    created: "%{model} was successfully created."
+    updated: "%{model} was successfully updated."
+    destroyed: "%{model} was successfully destroyed."
 
 
