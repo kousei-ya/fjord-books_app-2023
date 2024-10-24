@@ -1,0 +1,32 @@
+ja:
+  activerecord:
+    models: 
+      book: 本
+    attributes:
+      book:
+        title: タイトル
+        memo: メモ
+        author: 著者
+        picture: 画像
+  views:
+    common:
+      new: 新規作成
+      show: 詳細
+      delete: 削除
+      back: 戻る
+      edit: 編集
+  books:
+    index:
+      heading: 書籍一覧
+    edit: 
+      heading: 編集
+    new:
+      heading: 新規作成
+  helpers:
+    submit:
+      create: 登録
+      update: 更新
+  actions:
+      created: "%{model}が正常に作成されました"
+      updated: "%{model}が正常に更新されました"
+      destroyed: "%{model}が正常に削除されました"

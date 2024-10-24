@@ -31,3 +31,41 @@
 
 en:
   hello: "Hello world"
+  activerecord:
+    models:
+      book: book
+    attributes:
+      book:
+        title: Title
+        memo: Memo
+        author: Author
+        picture: Picture
+  views:
+    common:
+      new: New Book
+      show: Show
+      delete: Destroy
+      back: Back
+      edit: Edit
+  books:
+    index:
+      heading: Books
+    edit: 
+      heading: Editing
+    new:
+      heading: New Book
+  helpers:
+    submit:
+      create: Register
+      update: Update
+  errors:
+    template:
+      header:
+        one:   "%{count} error prohibited this book from being saved:"
+        other: "%{count} errors prohibited this book from being saved:"
+  actions:
+    created: "%{model} was successfully created."
+    updated: "%{model} was successfully updated."
+    destroyed: "%{model} was successfully destroyed."
+
+
