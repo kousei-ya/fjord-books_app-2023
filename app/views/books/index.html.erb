@@ -1,6 +1,9 @@
 <p style="color: green"><%= notice %></p>
 
 <h1><%= t('views.common.title_index', name: i18n_pluralize(Book.model_name.human)) %></h1>
+<p>
+  <%= link_to 'ユーザ一覧', users_path %>
+</p>
 
 <div id="books" class="index-items">
   <% @books.each do |book| %>

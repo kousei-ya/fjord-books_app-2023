@@ -11,6 +11,12 @@
   </head>
 
   <body class="<%= params[:action] %>">
+    <% if user_signed_in? %>
+      <p><%= User.human_attribute_name(:user) %>: <%= current_user.email %></p>
+      <%= button_to t('views.common.logout'), destroy_user_session_path, method: :delete %>
+
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
