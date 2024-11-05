@@ -24,5 +24,10 @@
     <strong><%= User.human_attribute_name(:self_introduction) %>:</strong>
     <%= user.self_introduction %>
   </p>
-
+  <% if user.user_icon.attached? %>
+  <p>
+    <strong><%= User.human_attribute_name(:user_icon) %>:</strong>
+    <%= image_tag user.user_icon.variant(resize_to_fit: [200, 200]) %>
+  </p>
+  <% end %>
 </div>
