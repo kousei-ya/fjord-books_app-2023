@@ -7,6 +7,38 @@ ja:
         restrict_dependent_destroy:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
+    models:
+      user: 'ユーザー'
+    attributes:
+      user:
+        postal_code: '郵便番号'
+        address: '住所'
+        profile: '自己紹介'
+        email: 'メールアドレス'
+        password: 'パスワード'
+        password_confirmation: 'もう一度入力'
+        remember_me: 'ログイン情報を記憶する'
+        user: 'ユーザー'
+        current_password: '現在のパスワード'
+  user:
+   edit: 
+     blank: 変更したくない場合は空白のままにしてください
+  devise:
+    sessions:
+      sign_in: "ログイン"
+      signed_in: "ログインできました"
+    registrations:
+      sign_up: "新規登録"
+      signed_up: "登録できました"
+      updated: "更新できました"
+    passwords:
+      forgot: "パスワードを忘れましたか？"
+    confirmations:
+      resend: "確認指示が届かない場合"
+    unlocks:
+      resend: "アンロック指示が届かない場合"
+    omniauth:
+      sign_in_with: "%{provider}でサインイン"
   date:
     abbr_day_names:
     - 日
@@ -102,6 +134,7 @@ ja:
       model_invalid: 'バリデーションに失敗しました: %{errors}'
       not_a_number: は数値で入力してください
       not_an_integer: は整数で入力してください
+      not_saved: 保存できませんでした
       odd: は奇数にしてください
       other_than: は%{count}以外の値にしてください
       present: は入力しないでください
@@ -120,6 +153,10 @@ ja:
       create: 登録する
       submit: 保存する
       update: 更新する
+      signup: 'サインアップ'
+      login: 'ログイン'
+      password_instruction: 'メールを送信'
+      
   number:
     currency:
       format:
@@ -192,8 +229,15 @@ ja:
       title_index: "%{name}の一覧"
       title_new: "%{name}の新規作成"
       title_edit: "%{name}の編集"
+      title_login: "ログイン"
       error: エラー
       validation_error: "%{errors}があるため、この%{name}は保存できませんでした"
+      logout: ログアウト
+      minimum_password_length: "%{count}文字以上"
+      title_forgot_password: "パスワードを忘れましたか？"
+      mail: "メールサイト"
+      current_pass: '変更を確認するには現在のパスワードが必要です'
+
     pagination:
       first: '« 最初'
       last: '最後 »'
