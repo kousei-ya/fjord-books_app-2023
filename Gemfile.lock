@@ -111,6 +111,8 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    devise-i18n (1.12.1)
+      devise (>= 4.9.0)
     erb_lint (0.4.0)
       activesupport
       better_html (>= 2.0.1)
@@ -227,8 +229,6 @@ GEM
     rails-html-sanitizer (1.6.0)
       loofah (~> 2.21)
       nokogiri (~> 1.14)
-    rails-ujs (0.1.0)
-      railties (>= 3.1)
     railties (7.0.6)
       actionpack (= 7.0.6)
       activesupport (= 7.0.6)
@@ -321,6 +321,7 @@ DEPENDENCIES
   carrierwave
   debug
   devise
+  devise-i18n
   erb_lint
   faker
   i18n_generators
@@ -331,7 +332,6 @@ DEPENDENCIES
   letter_opener_web
   puma
   rails (~> 7.0.6)
-  rails-ujs
   rubocop (~> 1.45.1)
   rubocop-fjord
   rubocop-rails
