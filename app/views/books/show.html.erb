@@ -6,7 +6,35 @@
 
 <nav class="page-nav">
   <%= link_to t('views.common.edit', name: Book.model_name.human.downcase), edit_book_path(@book) %> |
-  <%= link_to t('views.common.back', name: i18n_pluralize(Book.model_name.human.downcase)), books_path %>
-
-  <%= button_to t('views.common.destroy', name: Book.model_name.human.downcase), @book, method: :delete %>
+  <%= link_to t('views.common.back', name: Book.model_name.human.pluralize.downcase), books_path %>
+  <%= button_to t('views.common.destroy', name: Book.model_name.human.downcase), @book, method: :delete, data: { confirm: 'Are you sure?' } %>
 </nav>
+
+<h2><%= t('views.common.title_index', name: Comment.model_name.human) %></h2>
+<div class="show-item">
+  <% if @book.comments.any? %>
+    <ul>
+      <% @book.comments.each do |comment| %>
+        <li>
+          <p><%= comment.body %></p>
+          <small>Posted at <%= comment.created_at.strftime("%Y-%m-%d %H:%M") %></small>
+          <%= button_to 'Delete', report_comment_path(@book, comment), method: :delete, data: { confirm: 'Are you sure?' } %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p><%= t('views.common.no_create', name: Comment.model_name.human) %></p>
+  <% end %>
+
+  <% if @book.present? %>
+    <h3><%= t('views.common.title_new', name: Comment.model_name.human) %></h3>
+    <%= form_with(model: [ @book, @book.comments.build ], local: true) do |form| %>
+      <div>
+        <%= form.text_area :body, rows: 4 %>
+      </div>
+      <div>
+        <%= form.submit %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
