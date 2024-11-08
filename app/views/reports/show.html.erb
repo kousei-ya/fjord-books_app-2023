@@ -1,10 +1,39 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @report %>
-
-<div>
-  <%= link_to "Edit this report", edit_report_path(@report) %> |
-  <%= link_to "Back to reports", reports_path %>
-
-  <%= button_to "Destroy this report", @report, method: :delete %>
+<h1><%= t('views.common.title_show', name: Report.model_name.human) %></h1>
+  
+<div class="show-item">
+  <%= render @report %>
 </div>
+  
+<h3>Comments</h3>
+<% if @report.comments.any? %>
+  <ul>
+    <% @report.comments.each do |comment| %>
+      <li>
+        <p><%= comment.body %></p>
+        <small>Posted at <%= comment.created_at.strftime("%Y-%m-%d %H:%M") %></small>
+        <%= button_to 'Delete', report_comment_path(@report, comment), method: :delete, data: { confirm: 'Are you sure?' } %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No comments yet. Be the first to add one!</p>
+<% end %>
+  
+<% if @report.present? %>
+  <h3>Add a Comment</h3>
+  <%= form_with(model: [ @report, @report.comments.build ], local: true) do |form| %>
+    <div>
+      <%= form.label :body, "Your Comment" %>
+      <%= form.text_area :body, rows: 4 %>
+    </div>
+    <div>
+      <%= form.submit "Submit Comment" %>
+    </div>
+  <% end %>
+<% end %>
+
+<nav class="page-nav">
+  <%= link_to t('views.common.edit', name: Report.model_name.human.downcase), edit_report_path(@report) %> |
+  <%= link_to t('views.common.back', name: Report.model_name.human.pluralize.downcase), reports_path %>
+  <%= button_to t('views.common.destroy', name: Report.model_name.human.downcase), @report, method: :delete, data: { confirm: 'Are you sure?' } %>
+</nav>
