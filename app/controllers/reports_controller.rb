@@ -24,6 +24,7 @@ class ReportsController < ApplicationController
     @report = Report.new(report_params)
 
     respond_to do |format|
+      @report = current_user.reports.build(report_params)
       if @report.save
         format.html { redirect_to report_url(@report), notice: "Report was successfully created." }
         format.json { render :show, status: :created, location: @report }

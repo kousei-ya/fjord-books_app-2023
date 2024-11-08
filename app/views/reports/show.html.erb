@@ -3,6 +3,15 @@
 <div class="show-item">
   <%= render @report %>
 </div>
+
+<nav class="page-nav">
+  <% if current_user == @report.user %>
+    <%= link_to t('views.common.edit', name: Report.model_name.human.downcase), edit_report_path(@report) %> |
+    <%= button_to t('views.common.destroy', name: Report.model_name.human.downcase), @report, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <% end %>
+  <br>
+  <%= link_to t('views.common.back', name: Report.model_name.human.pluralize.downcase), reports_path %>
+  </nav>
   
 <h3>Comments</h3>
 <% if @report.comments.any? %>
@@ -32,8 +41,4 @@
   <% end %>
 <% end %>
 
-<nav class="page-nav">
-  <%= link_to t('views.common.edit', name: Report.model_name.human.downcase), edit_report_path(@report) %> |
-  <%= link_to t('views.common.back', name: Report.model_name.human.pluralize.downcase), reports_path %>
-  <%= button_to t('views.common.destroy', name: Report.model_name.human.downcase), @report, method: :delete, data: { confirm: 'Are you sure?' } %>
-</nav>
+
