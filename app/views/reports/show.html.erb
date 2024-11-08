@@ -1,5 +1,5 @@
 <h1><%= t('views.common.title_show', name: Report.model_name.human) %></h1>
-  
+
 <div class="show-item">
   <%= render @report %>
 </div>
@@ -12,7 +12,7 @@
   <br>
   <%= link_to t('views.common.back', name: Report.model_name.human.pluralize.downcase), reports_path %>
 </nav>
-  
+
 <h2><%= t('views.common.title_index', name: Comment.model_name.human) %></h2>
 <div class="show-item">
   <% if @report.comments.any? %>
@@ -35,7 +35,7 @@
   <% else %>
     <p><%= t('views.common.no_create', name: Comment.model_name.human) %></p>
   <% end %>
-  
+
   <% if @report.present? %>
     <h3><%= t('views.common.title_new', name: Comment.model_name.human) %></h3>
     <%= form_with(model: [ @report, @report.comments.build ], local: true) do |form| %>
@@ -48,6 +48,3 @@
     <% end %>
   <% end %>
 </div>
-
-
-
