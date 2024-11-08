@@ -11,7 +11,7 @@
   <% end %>
   <br>
   <%= link_to t('views.common.back', name: Report.model_name.human.pluralize.downcase), reports_path %>
-  </nav>
+</nav>
   
 <h3>Comments</h3>
 <% if @report.comments.any? %>
@@ -20,7 +20,9 @@
       <li>
         <p><%= comment.body %></p>
         <small>Posted at <%= comment.created_at.strftime("%Y-%m-%d %H:%M") %></small>
-        <%= button_to 'Delete', report_comment_path(@report, comment), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% if current_user == comment.user %>
+          <%= button_to 'Delete', report_comment_path(@report, comment), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
       </li>
     <% end %>
   </ul>
@@ -40,5 +42,6 @@
     </div>
   <% end %>
 <% end %>
+
 
 
