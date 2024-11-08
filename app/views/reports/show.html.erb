@@ -13,39 +13,41 @@
   <%= link_to t('views.common.back', name: Report.model_name.human.pluralize.downcase), reports_path %>
 </nav>
   
-<h3>Comments</h3>
-<% if @report.comments.any? %>
-  <ul>
-    <% @report.comments.each do |comment| %>
-      <li>
-        <p><%= comment.body %></p>
-        <small>
-          <%= t('views.common.created_by') %>:
-          <%= comment.user.name.present? ? comment.user.name : comment.user.email %>
-          ( <%= comment.created_at.strftime("%Y-%m-%d %H:%M") %> )
-        </small>
-        <% if current_user == comment.user %>
-          <%= button_to 'Delete', report_comment_path(@report, comment), method: :delete, data: { confirm: 'Are you sure?' } %>
-        <% end %>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <p>No comments yet. Be the first to add one!</p>
-<% end %>
-  
-<% if @report.present? %>
-  <h3>Add a Comment</h3>
-  <%= form_with(model: [ @report, @report.comments.build ], local: true) do |form| %>
-    <div>
-      <%= form.label :body, "Your Comment" %>
-      <%= form.text_area :body, rows: 4 %>
-    </div>
-    <div>
-      <%= form.submit "Submit Comment" %>
-    </div>
+<h2><%= t('views.common.title_index', name: Comment.model_name.human) %></h2>
+<div class="show-item">
+  <% if @report.comments.any? %>
+    <ul>
+      <% @report.comments.each do |comment| %>
+        <li>
+          <p><%= comment.body %></p>
+          <small>
+            <%= t('views.common.created_by') %>:
+            <%= comment.user.name.present? ? comment.user.name : comment.user.email %>
+            ( <%= comment.created_at.strftime("%Y-%m-%d %H:%M") %> )
+          </small>
+          <% if current_user == comment.user %>
+            <%= button_to 'Delete', report_comment_path(@report, comment), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <% end %>
+        </li>
+        <br><br>
+      <% end %>
+    </ul>
+  <% else %>
+    <p><%= t('views.common.no_create', name: Comment.model_name.human) %></p>
   <% end %>
-<% end %>
+  
+  <% if @report.present? %>
+    <h3><%= t('views.common.title_new', name: Comment.model_name.human) %></h3>
+    <%= form_with(model: [ @report, @report.comments.build ], local: true) do |form| %>
+      <div>
+        <%= form.text_area :body, rows: 4 %>
+      </div>
+      <div>
+        <%= form.submit %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
 
 
 
