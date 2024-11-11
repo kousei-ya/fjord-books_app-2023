@@ -12,7 +12,14 @@ class User < ApplicationRecord
   def verify_file_type
     return unless user_icon.attached?
 
+    unless user_icon.blob.image?
+      errors.add(:user_icon, I18n.t('errors.messages.invariable_error'))
+      return
+    end
+
     allowed_file_types = %w[image/jpg image/gif image/png]
-    errors.add(:user_icon, 'only jpg, jpeg, gif, png') unless allowed_file_types.include?(user_icon.blob.content_type)
+    unless allowed_file_types.include?(user_icon.blob.content_type)
+      errors.add(:user_icon, I18n.t('errors.messages.invalid_type'))
+    end
   end
 end

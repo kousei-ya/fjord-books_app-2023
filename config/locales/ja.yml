@@ -110,6 +110,8 @@ ja:
       too_long: は%{count}文字以内で入力してください
       too_short: は%{count}文字以上で入力してください
       wrong_length: は%{count}文字で入力してください
+      invalid_type: 画像ファイル（jpg, jpeg, gif, png）のみアップロード可能です。
+      invariable_error: 画像以外のファイルがアップロードされました。画像ファイルのみ表示できます。
     template:
       body: 次の項目を確認してください
       header: "%{model}に%{count}個のエラーが発生しました"
