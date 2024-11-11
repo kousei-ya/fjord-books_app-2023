@@ -5,6 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_one_attached :user_icon
 
+  validate :verify_file_type
+
   private
 
   def verify_file_type
