@@ -7,7 +7,7 @@
 <nav class="page-nav">
   <%= link_to t('views.common.edit', name: Book.model_name.human.downcase), edit_book_path(@book) %> |
   <%= link_to t('views.common.back', name: Book.model_name.human.pluralize.downcase), books_path %>
-  <%= button_to t('views.common.destroy', name: Book.model_name.human.downcase), @book, method: :delete, data: { confirm: 'Are you sure?' } %>
+  <%= button_to t('views.common.destroy', name: Book.model_name.human.downcase), @book, method: :delete, form: { data: { turbo_confirm: t('views.common.delete_confirm') } } %>
 </nav>
 
 <h2><%= t('views.common.title_index', name: Comment.model_name.human) %></h2>
@@ -23,7 +23,7 @@
             ( <%= I18n.l comment.created_at, format: :long %> )
           </small>
           <% if current_user == comment.user %>
-            <%= button_to t('views.common.destroy', name: Comment.model_name.human.downcase),book_comment_path(@book, comment), method: :delete, data: { confirm: 'Are you sure?' } %>
+            <%= button_to t('views.common.destroy', name: Comment.model_name.human.downcase),book_comment_path(@book, comment), method: :delete, form: { data: { turbo_confirm: t('views.common.delete_confirm') } } %>
           <% end %>
         </li>
         <br><br>
