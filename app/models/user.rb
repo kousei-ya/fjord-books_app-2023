@@ -17,7 +17,7 @@ class User < ApplicationRecord
       return
     end
 
-    allowed_file_types = %w[image/jpg image/gif image/png]
+    allowed_file_types = %w[image/jpeg image/gif image/png]
     unless allowed_file_types.include?(user_icon.blob.content_type)
       errors.add(:user_icon, I18n.t('errors.messages.invalid_type'))
     end
