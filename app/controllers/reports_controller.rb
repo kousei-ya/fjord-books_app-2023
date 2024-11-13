@@ -2,6 +2,7 @@
 
 class ReportsController < ApplicationController
   before_action :set_report, only: %i[show edit update destroy]
+  before_action :check_user_permission, only: %i[edit update destroy]
 
   # GET /reports or /reports.json
   def index
@@ -57,6 +58,12 @@ class ReportsController < ApplicationController
   private
 
   # Use callbacks to share common setup or constraints between actions.
+  def check_user_permission
+    unless @report.user == current_user
+      redirect_to reports_url
+    end
+  end
+  
   def set_report
     @report = Report.find(params[:id])
   end

@@ -2,6 +2,8 @@
 
 class CommentsController < ApplicationController
   before_action :set_commentable
+  before_action :set_comment, only: [:destroy]
+  before_action :check_user_permission, only: %i[edit update destroy]
 
   def create
     @comment = @commentable.comments.build(comment_params)
@@ -16,7 +18,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment = @commentable.comments.find(params[:id])
     @comment.destroy
-    redirect_to @commentable, notice: t('controllers.common.notice_destroy', name: Comment.model_name.human)
+    redirect_to @commentable, notice: t('controllers.common.notice_destroy', name: Comment.model_name.human)  
   end
 
   private
@@ -26,6 +28,16 @@ class CommentsController < ApplicationController
       @commentable = Report.find(params[:report_id])
     elsif params[:book_id]
       @commentable = Book.find(params[:book_id])
+    end
+  end
+
+  def set_comment
+    @comment = @commentable.comments.find(params[:id])
+  end
+
+  def check_user_permission
+    unless @comment.user == current_user
+      redirect_to reports_url
     end
   end
 
