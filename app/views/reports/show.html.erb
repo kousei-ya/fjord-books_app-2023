@@ -23,7 +23,7 @@
           <small>
             <%= t('views.common.created_by') %>:
             <%= comment.user.name.present? ? comment.user.name : comment.user.email %>
-            ( <%= comment.created_at.strftime("%Y-%m-%d %H:%M") %> )
+            ( <%= I18n.l comment.created_at, format: :long %> )
           </small>
           <% if current_user == comment.user %>
             <%= button_to t('views.common.destroy', name: Comment.model_name.human.downcase),report_comment_path(@report, comment), method: :delete, data: { confirm: 'Are you sure?' } %>
