@@ -36,7 +36,4 @@
 
 /public/uploads
 
-/test
-/app/helpers/reports_helper.rb
-
 .env
