@@ -122,6 +122,8 @@ ja:
       create: 登録する
       submit: 保存する
       update: 更新する
+  notices:
+    user_icon_missing: アイコンは設定されていません
   number:
     currency:
       format:

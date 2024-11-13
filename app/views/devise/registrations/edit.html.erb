@@ -17,9 +17,12 @@
   <% if @user.user_icon.attached? %>
   <p>
     <strong><%= User.human_attribute_name(:user_icon) %>:</strong>
-    <% if @user.user_icon.attached? && @user.user_icon.blob.image? %>
-      <%= image_tag @user.user_icon.variant(resize_to_fit: [200, 200]) %>
-    <% end %>
+    <%= image_tag @user.user_icon.variant(resize_to_limit: [200, 200]) %>
+  </p>
+  <% else %>
+  <p>
+    <strong><%= User.human_attribute_name(:user_icon) %>:</strong>
+    <span><%= t('notices.user_icon_missing') %></span>
   </p>
   <% end %>
 
