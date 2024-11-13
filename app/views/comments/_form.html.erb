@@ -1,0 +1,9 @@
+<h3><%= t('views.common.title_new', name: Comment.model_name.human) %></h3>
+<%= form_with(model: [ @commentable, @commentable.comments.build ], local: true) do |form| %>
+  <div>
+    <%= form.text_area :body, rows: 4 %>
+  </div>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

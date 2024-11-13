@@ -15,17 +15,7 @@
   <% if @book.comments.any? %>
     <ul>
       <% @book.comments.each do |comment| %>
-        <li>
-          <p><%= comment.body %></p>
-          <small>
-            <%= t('views.common.created_by') %>:
-            <%= comment.user.name.present? ? comment.user.name : comment.user.email %>
-            ( <%= I18n.l comment.created_at, format: :long %> )
-          </small>
-          <% if current_user == comment.user %>
-            <%= button_to t('views.common.destroy', name: Comment.model_name.human.downcase),book_comment_path(@book, comment), method: :delete, form: { data: { turbo_confirm: t('views.common.delete_confirm') } } %>
-          <% end %>
-        </li>
+        <%= render comment %>
         <br><br>
       <% end %>
     </ul>
@@ -34,14 +24,6 @@
   <% end %>
 
   <% if @book.present? %>
-    <h3><%= t('views.common.title_new', name: Comment.model_name.human) %></h3>
-    <%= form_with(model: [ @book, @book.comments.build ], local: true) do |form| %>
-      <div>
-        <%= form.text_area :body, rows: 4 %>
-      </div>
-      <div>
-        <%= form.submit %>
-      </div>
-    <% end %>
+    <%= render 'comments/form', commentable: @book %>
   <% end %>
 </div>
