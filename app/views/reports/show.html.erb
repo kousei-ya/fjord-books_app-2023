@@ -17,7 +17,7 @@
   <% end %>
 
   <% if @report.mentioned_reports.exists? %>
-    <p><strong>この日報を参照している日報:</strong></p>
+    <p><strong><%= t('views.reports.show.mentioned_reports') %></strong></p>
     <ul>
       <% @report.mentioned_reports.each do |mentioning_report| %>
         <li>
