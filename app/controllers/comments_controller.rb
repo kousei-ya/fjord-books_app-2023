@@ -35,7 +35,7 @@ class CommentsController < ApplicationController
   end
 
   def check_user_permission
-    unless @comment.user == current_user
+    if @comment.user != current_user
       redirect_to @commentable, alert: t('controllers.common.error_not_authorized')
     end
   end
