@@ -15,4 +15,16 @@
   <% if @report.editable?(current_user) %>
     <%= button_to t('views.common.destroy', name: Report.model_name.human.downcase), @report, method: :delete %>
   <% end %>
+
+  <% if @report.mentioned_reports.exists? %>
+    <p><strong>この日報を参照している日報:</strong></p>
+    <ul>
+      <% @report.mentioned_reports.each do |mentioning_report| %>
+        <li>
+          <%= link_to mentioning_report.title, report_path(mentioning_report) %> 
+          (<%= link_to mentioning_report.user.name_or_email, mentioning_report.user %>)
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
 </nav>
