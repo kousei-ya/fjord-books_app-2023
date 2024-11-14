@@ -21,7 +21,7 @@
     <ul>
       <% @report.mentioned_reports.each do |mentioning_report| %>
         <li>
-          <%= link_to mentioning_report.title, report_path(mentioning_report) %> 
+          <%= link_to mentioning_report.title, report_path(mentioning_report) %>
           (<%= link_to mentioning_report.user.name_or_email, mentioning_report.user %>)
         </li>
       <% end %>
