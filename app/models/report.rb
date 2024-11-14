@@ -21,4 +21,20 @@ class Report < ApplicationRecord
   def created_on
     created_at.to_date
   end
-end
+
+  def update_mentions
+    mentioned_report_ids = extract_mentioned_report_ids(self.content)
+    self.report_mentions.where.not(mentioned_report_id: mentioned_report_ids).destroy_all
+    mentioned_report_ids.each do |mentioned_report_id|
+      self.report_mentions.find_or_create_by(mentioned_report_id: mentioned_report_id)
+    end
+  end
+
+  def remove_mentions
+    self.report_mentions.destroy_all
+  end
+
+  def extract_mentioned_report_ids(text)
+    text.scan(%r{http://localhost:3000/reports/(\d+)}).flatten.map(&:to_i)
+  end
+end  
