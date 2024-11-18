@@ -53,7 +53,7 @@ class ReportsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def check_user_permission
-    unless @report.user == current_user
+    if @report.user != current_user
       redirect_to reports_url
     end
   end
