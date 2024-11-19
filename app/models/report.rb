@@ -25,7 +25,7 @@ class Report < ApplicationRecord
     mentioned_report_ids = extract_mentioned_report_ids(content)
     report_mentions.where.not(mentioned_report_id: mentioned_report_ids).destroy_all
     mentioned_report_ids.each do |mentioned_report_id|
-      report_mentions.find_or_create_by(mentioned_report_id:)
+      report_mentions.find_or_create_by!(mentioned_report_id:)
     end
   end
 
