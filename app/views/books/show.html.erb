@@ -6,7 +6,24 @@
 
 <nav class="page-nav">
   <%= link_to t('views.common.edit', name: Book.model_name.human.downcase), edit_book_path(@book) %> |
-  <%= link_to t('views.common.back', name: i18n_pluralize(Book.model_name.human.downcase)), books_path %>
-
-  <%= button_to t('views.common.destroy', name: Book.model_name.human.downcase), @book, method: :delete %>
+  <%= link_to t('views.common.back', name: Book.model_name.human.pluralize.downcase), books_path %>
+  <%= button_to t('views.common.destroy', name: Book.model_name.human.downcase), @book, method: :delete, form: { data: { turbo_confirm: t('views.common.delete_confirm') } } %>
 </nav>
+
+<h2><%= t('views.common.title_index', name: Comment.model_name.human) %></h2>
+<div class="show-item">
+  <% if @book.comments.any? %>
+    <ul>
+      <% @book.comments.each do |comment| %>
+        <%= render comment %>
+        <br><br>
+      <% end %>
+    </ul>
+  <% else %>
+    <p><%= t('views.common.no_create', name: Comment.model_name.human) %></p>
+  <% end %>
+
+  <% if @book.present? %>
+    <%= render 'comments/form', commentable: @book %>
+  <% end %>
+</div>
