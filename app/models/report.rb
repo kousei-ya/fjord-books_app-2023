@@ -9,7 +9,6 @@ class Report < ApplicationRecord
   has_many :mentioned_reports, through: :reverse_report_mentions, source: :report
 
   after_save :update_mentions
-  before_destroy :remove_mentions
 
   validates :title, presence: true
   validates :content, presence: true
@@ -28,10 +27,6 @@ class Report < ApplicationRecord
     mentioned_report_ids.each do |mentioned_report_id|
       report_mentions.find_or_create_by(mentioned_report_id:)
     end
-  end
-
-  def remove_mentions
-    report_mentions.destroy_all
   end
 
   def extract_mentioned_report_ids(text)
