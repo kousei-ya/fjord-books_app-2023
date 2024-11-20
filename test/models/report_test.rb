@@ -3,7 +3,44 @@
 require 'test_helper'
 
 class ReportTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+  test '現在ログインしているがユーザ日報の作成者ならtrueを返す' do
+    kousei = User.create!(email: 'kousei@example.com', password: 'password')
+    report = kousei.reports.create!(title: '今日も頑張った', content: '帰りましょう')
+
+    assert report.editable?(kousei)
+  end
+
+  test '現在ログインしているがユーザ日報の作成者でなかったらfalseを返す' do
+    bob = User.create!(email: 'Bob@example.com', password: 'password')
+    carol = User.create!(email: 'Carol@example.com', password: 'password')
+    report = bob.reports.create!(title: '今日も頑張った', content: '帰りましょう')
+
+    assert_not report.editable?(carol)
+  end
+
+  test 'レポートを作成した日付を取得する' do
+    dave = User.create!(email: 'Dave@example.com', password: 'password')
+    report = dave.reports.create!(title: '今日も頑張った', content: '帰りましょう', created_at: Time.zone.local(2024, 11, 18, 15, 30, 0))
+
+    formatted_date = report.created_at.strftime('%a, %d %b %Y')
+
+    assert_equal 'Mon, 18 Nov 2024', formatted_date
+  end
+
+  test '日報に他の日報のURLが含まれている時に対象の日報をmentioning_reportsに追加する' do
+    eve = User.create!(email: 'Eve@example.com', password: 'password')
+    frank = User.create!(email: 'Frank@example.com', password: 'password')
+
+    report1 = eve.reports.create!(id: 1, title: 'report1', content: 'http://localhost:3000/reports/2')
+    report2 = frank.reports.create!(id: 2, title: 'report2', content: 'http://localhost:3000/reports/3')
+    report3 = frank.reports.create!(id: 3, title: 'report3', content: 'いい天気ですね')
+
+    report1.send(:save_mentions)
+    report2.send(:save_mentions)
+    report3.send(:save_mentions)
+
+    assert_includes report1.mentioning_reports, report2
+    assert_includes report2.mentioning_reports, report3
+    assert_not_includes report1.mentioning_reports, report3
+  end
 end
