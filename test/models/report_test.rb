@@ -3,14 +3,14 @@
 require 'test_helper'
 
 class ReportTest < ActiveSupport::TestCase
-  test '現在ログインしているがユーザ日報の作成者ならtrueを返す' do
+  test '日報を編集できればeditable?がtrueを返す' do
     kousei = User.create!(email: 'kousei@example.com', password: 'password')
     report = kousei.reports.create!(title: '今日も頑張った', content: '帰りましょう')
 
     assert report.editable?(kousei)
   end
 
-  test '現在ログインしているがユーザ日報の作成者でなかったらfalseを返す' do
+  test '日報を編集できなければeditable?がfalseを返す' do
     bob = User.create!(email: 'Bob@example.com', password: 'password')
     carol = User.create!(email: 'Carol@example.com', password: 'password')
     report = bob.reports.create!(title: '今日も頑張った', content: '帰りましょう')
