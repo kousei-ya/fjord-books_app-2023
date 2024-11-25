@@ -22,9 +22,7 @@ class ReportTest < ActiveSupport::TestCase
     dave = User.create!(email: 'Dave@example.com', password: 'password')
     report = dave.reports.create!(title: '今日も頑張った', content: '帰りましょう', created_at: Time.zone.local(2024, 11, 18, 15, 30, 0))
 
-    formatted_date = report.created_at.strftime('%a, %d %b %Y')
-
-    assert_equal 'Mon, 18 Nov 2024', formatted_date
+    assert_equal Date.new(2024, 11, 18), report.created_on
   end
 
   test '日報に他の日報のURLが含まれている時に対象の日報をmentioning_reportsに追加する' do
