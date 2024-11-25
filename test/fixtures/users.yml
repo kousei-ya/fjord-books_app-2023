@@ -5,7 +5,31 @@
 # below each fixture, per the syntax in the comments below
 #
 alice:
-  email: 'alice@example.com'
+  email: alice@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+
+kousei:
+  email: kousei@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+
+bob:
+  email: bob@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+
+carol:
+  email: carol@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+
+dave:
+  email: dave@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+
+eve:
+  email: eve@example.com
+  encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
+
+frank:
+  email: frank@example.com
   encrypted_password: <%= Devise::Encryptor.digest(User, 'password') %>
 #
 # two: {}
