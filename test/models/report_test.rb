@@ -29,16 +29,12 @@ class ReportTest < ActiveSupport::TestCase
     eve = users(:eve)
     frank = users(:frank)
 
-    report1 = eve.reports.create!(id: 1, title: 'report1', content: 'http://localhost:3000/reports/2')
-    report2 = frank.reports.create!(id: 2, title: 'report2', content: 'http://localhost:3000/reports/3')
-    report3 = frank.reports.create!(id: 3, title: 'report3', content: 'いい天気ですね')
+    report1 = eve.reports.create!(title: 'report1', content: "いい天気ですね")
+    report2 = frank.reports.create!(title: 'report2', content: "http://localhost:3000/reports/#{report1.id}")
+    report3 = frank.reports.create!(title: 'report3', content: "http://localhost:3000/reports/#{report2.id}")
 
-    report1.send(:save_mentions)
-    report2.send(:save_mentions)
-    report3.send(:save_mentions)
-
-    assert_includes report1.mentioning_reports, report2
-    assert_includes report2.mentioning_reports, report3
-    assert_not_includes report1.mentioning_reports, report3
+    assert_includes report2.mentioning_reports, report1
+    assert_includes report3.mentioning_reports, report2
+    assert_not_includes report2.mentioning_reports, report3
   end
 end
