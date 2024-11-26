@@ -53,6 +53,7 @@ class ReportsTest < ApplicationSystemTestCase
     assert_text '日報が削除されました'
 
     visit reports_url
-    assert_no_text 'テストについて'
+    assert_no_text 'Mystring'
+    assert_no_text 'Mytext'
   end
 end
